@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recently Viewed Products</title>
+</head>
+
+<body>
+
+<h1>Recently Viewed Products</h1>
+
+{% if products %}
+
+    {% for product in products %}
+
+        <div>
+            <h3>{{ product.name }}</h3>
+
+            <p>Price: ₹{{ product.price }}</p>
+
+            <a href="{% url 'product_detail' product.id %}">
+                View Product
+            </a>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No recently viewed products.</p>
+
+{% endif %}
+
+</body>
+</html>

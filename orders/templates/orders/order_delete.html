@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Order</title>
+</head>
+
+<body>
+
+<h1>Delete Order #{{ order.id }}</h1>
+
+<p>
+    Are you sure you want to delete this order?
+</p>
+
+<p>
+    Total: ₹{{ order.total_amount }}
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Yes, Delete Order
+    </button>
+
+    <a href="{% url 'order_detail' order.id %}">
+        Cancel
+    </a>
+
+</form>
+
+</body>
+</html>

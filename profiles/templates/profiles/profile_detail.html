@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+</head>
+
+<body>
+
+<h1>My Profile</h1>
+
+<p><strong>Username:</strong> {{ profile.user.username }}</p>
+
+<p><strong>Email:</strong> {{ profile.user.email }}</p>
+
+<p><strong>Phone:</strong> {{ profile.phone }}</p>
+
+<p><strong>Address:</strong> {{ profile.address }}</p>
+
+<p><strong>City:</strong> {{ profile.city }}</p>
+
+<p><strong>State:</strong> {{ profile.state }}</p>
+
+<br>
+
+<a href="{% url 'profile_update' %}">
+    <button type="button">Update Profile</button>
+</a>
+
+<a href="{% url 'profile_delete' %}">
+    <button type="button">Delete Profile</button>
+</a>
+
+<br><br>
+
+<a href="{% url 'product_list' %}">
+    Back to Home
+</a>
+
+</body>
+</html>

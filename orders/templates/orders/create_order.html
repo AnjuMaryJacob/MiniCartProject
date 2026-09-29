@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Order</title>
+</head>
+
+<body>
+
+<h1>Place Order</h1>
+
+<h2>Order Summary</h2>
+
+{% for item in cart_items %}
+
+    <div>
+
+        <h3>{{ item.product.name }}</h3>
+
+        <p>
+            Quantity: {{ item.quantity }}
+        </p>
+
+        <p>
+            Price: ₹{{ item.product.price }}
+        </p>
+
+        <p>
+            Subtotal: ₹{{ item.get_total }}
+        </p>
+
+    </div>
+
+    <hr>
+
+{% endfor %}
+
+<h2>
+    Total: ₹{{ total }}
+</h2>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Place Order
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'view_cart' %}">
+    Back to Cart
+</a>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order #{{ order.id }}</title>
+</head>
+
+<body>
+
+<h1>Order #{{ order.id }}</h1>
+
+<p>
+    Date:
+    {{ order.created_at }}
+</p>
+
+<p>
+    Status:
+    {{ order.status }}
+</p>
+
+<h2>Items</h2>
+
+{% for item in order.items.all %}
+
+    <div>
+
+        <h3>{{ item.product.name }}</h3>
+
+        <p>
+            Quantity: {{ item.quantity }}
+        </p>
+
+        <p>
+            Price: ₹{{ item.price }}
+        </p>
+
+        <p>
+            Subtotal:
+            ₹{{ item.get_total }}
+        </p>
+
+    </div>
+
+    <hr>
+
+{% endfor %}
+
+<h2>
+    Total: ₹{{ order.total_amount }}
+</h2>
+
+<h2>Total: ₹{{ order.total_amount }}</h2>
+
+<a href="{% url 'order_update' order.id %}">
+    <button type="button">Update Order</button>
+</a>
+
+<a href="{% url 'order_delete' order.id %}">
+    <button type="button">Delete Order</button>
+</a>
+
+<a href="{% url 'order_list' %}">
+    Back to My Orders
+</a>
+
+</body>
+</html>

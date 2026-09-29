@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+</head>
+
+<body>
+
+<h1>My Orders</h1>
+
+{% if orders %}
+
+    {% for order in orders %}
+
+        <div>
+
+            <h3>Order #{{ order.id }}</h3>
+
+            <p>
+                Date:
+                {{ order.created_at }}
+            </p>
+
+            <p>
+                Status:
+                {{ order.status }}
+            </p>
+
+            <p>
+                Total:
+                ₹{{ order.total_amount }}
+            </p>
+
+            <a href="{% url 'order_detail' order.id %}">
+                View Order
+            </a>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>You haven't placed any orders yet.</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'product_list' %}">
+    Continue Shopping
+</a>
+
+</body>
+</html>

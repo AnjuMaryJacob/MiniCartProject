@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Shopping Cart</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #eeeeee;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<h1>My Shopping Cart</h1>
+
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% if cart_items %}
+
+<table>
+
+    <tr>
+
+        <th>Product</th>
+
+        <th>Price</th>
+
+        <th>Quantity</th>
+
+        <th>Total</th>
+
+        <th>Action</th>
+
+    </tr>
+
+
+    {% for item in cart_items %}
+
+    <tr>
+
+        <td>
+            {{ item.product.name }}
+        </td>
+
+        <td>
+            ₹{{ item.product.price }}
+        </td>
+
+        <td>
+
+            <form method="POST"
+                  action="{% url 'update_cart' item.id %}">
+
+                {% csrf_token %}
+
+                <input
+                    type="number"
+                    name="quantity"
+                    value="{{ item.quantity }}"
+                    min="1"
+                >
+
+                <button type="submit">
+                    Update
+                </button>
+
+            </form>
+
+        </td>
+
+        <td>
+            ₹{{ item.get_total }}
+        </td>
+
+        <td>
+
+            <a href="{% url 'remove_from_cart' item.id %}">
+                Remove
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+<div class="total">
+
+    Grand Total:
+    ₹{{ total }}
+    
+    <a href="{% url 'create_order' %}">
+    <button type="button">
+        Place Order
+    </button>
+    </a>
+</div>
+
+
+{% else %}
+
+<h2>Your cart is empty.</h2>
+
+{% endif %}
+
+
+<br>
+
+<a href="{% url 'product_list' %}">
+    Continue Shopping
+</a>
+
+</body>
+
+</html>
